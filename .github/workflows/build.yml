@@ -1,0 +1,30 @@
+name: build
+
+on:
+  schedule:
+  # 10:30 UTC / 6:30AM Eastern
+    - cron:  '30 10 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+      with:
+        ref: master
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+    - run: npm install
+    - run: npm index.js
+    - name: push
+      uses: github-actions-x/commit@v2.8
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        push-branch: 'main'
+        commit-message: 'publish'
+        force-add: 'true'
+        files: data/teams.json 
+        name: Shoeless Bot Jackson 
+        email: bot@jorb.in 
