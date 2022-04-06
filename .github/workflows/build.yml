@@ -1,6 +1,9 @@
 name: build
 
 on:
+  push:
+    paths:
+      - '.github/workflows/build.yml'
   schedule:
   # 10:30 UTC / 6:30AM Eastern
   # 2:30 UTC  / 10:30PM Eastern
@@ -18,7 +21,7 @@ jobs:
       with:
         node-version: '14'
     - run: npm install
-    - run: npm index.js
+    - run: node index.js
     - name: push
       uses: github-actions-x/commit@v2.8
       with:
