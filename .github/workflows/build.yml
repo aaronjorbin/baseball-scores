@@ -12,7 +12,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@master
       with:
-        ref: master
+        ref:  main
     - uses: actions/setup-node@v3
       with:
         node-version: '14'
