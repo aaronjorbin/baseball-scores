@@ -55,7 +55,7 @@ const getGames = async () => {
 // filter the games and return each team and score as an object
 const getTeamsResults = (data, log ) => {
     data.dates.forEach( date => { date.games.forEach( (game) => {
-        if ( game.status.statusCode === 'F' ) {
+        if ( game.status.statusCode === 'F' && game.seriesDescription !== 'Spring Training' ) {
             if ( ! log[ game.teams.away.team.name ] ){
                 log[ game.teams.away.team.name ] = blankData();
             }
