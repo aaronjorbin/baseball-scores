@@ -22,15 +22,15 @@ const blankData = () => {
     }
 }
 
-// get /data/teams.json
+// get /data/results.json
 const loadTeamsData = async () => {
-    const data = fs.readFileSync('data/teams.json', 'utf8' );
+    const data = fs.readFileSync('data/results.json', 'utf8' );
     return JSON.parse(data);
 }
 
 // save the data to the file
 const saveData = async (data) => {
-    fs.writeFileSync('data/teams.json', JSON.stringify(data));
+    fs.writeFileSync('data/results.json', JSON.stringify(data));
 }
 
 // fetch data from http://statsapi.mlb.com/api/v1/schedule/games/?sportId=1&startDate=2019-03-28&endDate=2019-09-29
