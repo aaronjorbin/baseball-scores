@@ -105,4 +105,6 @@ getData().then( async (data) => {
             process.exit(1);
         }
     }
+
+    console.table( data );
 });
