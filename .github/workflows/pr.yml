@@ -1,0 +1,19 @@
+name: build
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+      with:
+        ref:  main
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+    - run: npm install
+    - run: node index.js
