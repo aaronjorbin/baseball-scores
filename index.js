@@ -3,6 +3,8 @@ const axios = require('axios');
 const { Console } = require('console');
 const fs = require('fs');
 
+const currentRound = "1";
+
 const blankData = () => {
     return {
         0: false,
@@ -22,15 +24,32 @@ const blankData = () => {
     }
 }
 
-// get /data/teams.json
-const loadTeamsData = async () => {
-    const data = fs.readFileSync('data/teams.json', 'utf8' );
-    return JSON.parse(data);
+// get /data/results.json
+const loadResultsData = async () => {
+	const data = fs.readFileSync('data/results.json', 'utf8' );
+	return JSON.parse(data);
 }
 
 // save the data to the file
 const saveData = async (data) => {
-    fs.writeFileSync('data/teams.json', JSON.stringify(data));
+    fs.writeFileSync('data/results.json', JSON.stringify(data));
+}
+
+const loadTeamsData = async () => {
+	const data = fs.readFileSync('data/teams.json', 'utf8' );
+	return JSON.parse(data);
+}
+
+const loadCompetitionData = async () => {
+	const data = fs.readFileSync('data/picks.json', 'utf8');
+	return JSON.parse(data);
+}
+
+const loadCurrentCompetitionData = async () => {
+	const data = loadCompetitionData();
+	const today = new Date();
+
+	return data[today.toISOString().substring(0, 4)][currentRound];
 }
 
 // fetch data from http://statsapi.mlb.com/api/v1/schedule/games/?sportId=1&startDate=2019-03-28&endDate=2019-09-29
@@ -90,6 +109,16 @@ const getData = async () => {
     return teamsResults;
 }
 
+const displayRoundTable = async () => {
+	const teams = await loadTeamsData();
+	const results = await getData();
+
+	const currentRound = await loadCurrentCompetitionData();
+	for ( let team in teams ) {
+
+	}
+}
+
 // call getData
 getData().then( async (data) => {
     // check each team to see if they have won
@@ -108,3 +137,5 @@ getData().then( async (data) => {
 
     console.table( data );
 });
+
+displayRoundTable();
