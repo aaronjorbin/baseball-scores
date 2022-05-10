@@ -100,7 +100,7 @@ getData().then( async (data) => {
         });
         // log the team and the number of wins
         console.log(`${team} has ${wins.length} scores`);
-        if ( wins.length >= 13) {
+        if ( wins.length > 13) {
             // exit status 1
             process.exit(1);
         }
