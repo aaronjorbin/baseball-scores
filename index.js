@@ -92,7 +92,8 @@ const getData = async () => {
 
 // call getData
 getData().then( async (data) => {
-    // check each team to see if they have won
+    // check each team to see if they have won and fail build if someone did
+    let exitStatus = 0;
     for ( let team in data ) {
         // filter the data to find all true
         const wins = Object.keys(data[team]).filter((score) => {
@@ -100,11 +101,12 @@ getData().then( async (data) => {
         });
         // log the team and the number of wins
         console.log(`${team} has ${wins.length} scores`);
-        if ( wins.length >= 13) {
+        if ( wins.length >= 14) {
             // exit status 1
-            process.exit(1);
+            exitStatus = 1;
         }
     }
 
     console.table( data );
+    process.exit( exitStatus );
 });
